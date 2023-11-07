@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_clone/comman/widget/bottom_bar.dart';
 import 'package:youtube_clone/features/Home/Screen/HomeScreen.dart';
 import 'package:youtube_clone/features/auth/screen/auth_screen.dart';
 
@@ -11,6 +12,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case HomeScreen.routeName:
       return MaterialPageRoute(
           builder: (_) => const HomeScreen(), settings: routeSettings);
+    case BottomBar.routeName:
+      return MaterialPageRoute(
+          builder: (_) => const BottomBar(), settings: routeSettings);
     default:
       return MaterialPageRoute(
           builder: (_) => const Scaffold(
