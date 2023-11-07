@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_clone/Providers/user_provider.dart';
+import 'package:youtube_clone/comman/widget/bottom_bar.dart';
 import 'package:youtube_clone/constants/errorHandling.dart';
 import 'package:youtube_clone/constants/utils..dart';
 import 'package:youtube_clone/models/user.dart';
@@ -69,8 +70,42 @@ class AuthService {
             await preferences.setString(
                 "X-auth-token", jsonDecode(res.body)['token']);
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, BottomBar.routeName, (route) => false);
           });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      print(e.toString());
+    }
+  }
+
+  // get user data
+  void getUserData(
+      BuildContext context,
+  ) async {
+    try {
+      SharedPreferences preferences=await SharedPreferences.getInstance();
+      String? token =preferences.getString("x-auth-token");
+      if(token==null){
+        preferences.setString("x-auth-token", '');
+      }
+      var tokenRes=await http.post(Uri.parse("$uri/tokenIsValid"),
+      headers: <String, String>{
+        'Content-type': 'application/json; charset=UTF-8',
+        'x-auth-token':token!
+      }
+      );
+      var response=jsonDecode(tokenRes.body);
+      if(response==true){
+        // await
+        // get the user data
+        http.Response userRes=await http.get(Uri.parse("$uri/"),
+            headers: <String, String>{
+              'Content-type': 'application/json; charset=UTF-8',
+              'x-auth-token':token
+            });
+        var userProvider=Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
+      }
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());
