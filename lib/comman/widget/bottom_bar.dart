@@ -1,12 +1,17 @@
-import 'package:flutter/material.dart' hide Badge;
-import 'package:youtube_clone/constants/global_variable.dart';
-import 'package:badges/badges.dart' as badge;
-import 'package:youtube_clone/features/Account/Screen/Account.dart';
-import 'package:youtube_clone/features/Home/Screen/HomeScreen.dart';
-class BottomBar extends StatefulWidget {
-  static const String routeName = './actual-home';
 
-  const BottomBar({super.key});
+import 'package:badges/badges.dart' as badge;
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/user_provider.dart';
+import '../../constants/global_variable.dart';
+import '../../features/Account/Screen/Account.dart';
+import '../../features/Home/Screen/HomeScreen.dart';
+import '../../features/cart/screen/CartScreen.dart';
+
+class BottomBar extends StatefulWidget {
+  static const String routeName = '/actual-home';
+  const BottomBar({Key? key}) : super(key: key);
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -14,19 +19,25 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _page = 0;
-  double _bottomBarWidth = 42;
-  double _bottomBarBorderWidth = 42;
-  List<Widget>pages=[
+  double bottomBarWidth = 42;
+  double bottomBarBorderWidth = 5;
+
+  List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
+    const CartScreen(),
   ];
-void updatePage(int page){
-  setState(() {
-    _page=page;
-  });
-}
+
+  void updatePage(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
+
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -37,55 +48,73 @@ void updatePage(int page){
         iconSize: 28,
         onTap: updatePage,
         items: [
+          // HOME
           BottomNavigationBarItem(
-              icon: Container(
-            width: _bottomBarWidth,
-            decoration: BoxDecoration(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
                 border: Border(
-                    top: BorderSide(
-                        color: _page == 0
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.unselectedNavBarColor,
-                      width: _bottomBarBorderWidth
-                    )
-                )
+                  top: BorderSide(
+                    color: _page == 0
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.home_outlined,
+              ),
             ),
-                child: const Icon(Icons.home_outlined),
+            label: '',
           ),
-            label: "Home"
-          ),BottomNavigationBarItem(
-              icon: Container(
-            width: _bottomBarWidth,
-            decoration: BoxDecoration(
+          // ACCOUNT
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
                 border: Border(
-                    top: BorderSide(
-                        color: _page == 1
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.unselectedNavBarColor,
-                      width: _bottomBarBorderWidth
-                    )
-                )
+                  top: BorderSide(
+                    color: _page == 1
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.person_outline_outlined,
+              ),
             ),
-                child: const Icon(Icons.person_2_outlined),
+            label: '',
           ),
-            label: ""
-          ),BottomNavigationBarItem(
-              icon: Container(
-            width: _bottomBarWidth,
-            decoration: BoxDecoration(
+          // CART
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
                 border: Border(
-                    top: BorderSide(
-                        color: _page == 2
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.unselectedNavBarColor,
-                      width: _bottomBarBorderWidth
-                    )
-                )
+                  top: BorderSide(
+                    color: _page == 2
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child:badge.Badge(
+
+                badgeContent: Text(userCartLen.toString()),
+                badgeStyle: const badge.BadgeStyle(
+                  badgeColor: Colors.white
+                ),
+                child: const Icon(
+                  Icons.shopping_cart_outlined,
+                ),
+              ),
             ),
-                child: const Icon(Icons.home_outlined),
+            label: '',
           ),
-            label: "Home"
-          )
         ],
       ),
     );
