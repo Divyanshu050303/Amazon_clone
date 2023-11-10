@@ -26,7 +26,7 @@ class AccountScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.topLeft,
                 child: Image.asset(
-                  'assets/images/amazon_in.png',
+                  'assets/amazon_in.png',
                   width: 120,
                   height: 45,
                   color: Colors.black,
@@ -34,8 +34,8 @@ class AccountScreen extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(left: 15, right: 15),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(right: 15),
                       child: Icon(Icons.notifications_outlined),
