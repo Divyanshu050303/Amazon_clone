@@ -1,62 +1,96 @@
+
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/constants/global_variable.dart';
-import 'package:youtube_clone/features/Account/Widget/SingleProduct.dart';
+
+import '../../../constants/global_variable.dart';
+import '../../../constants/loader.dart';
+import '../../../models/order.dart';
+import '../../orderDetails/screen/orderDetailsScreen.dart';
+import '../services/accountSrevices.dart';
+import 'SingleProduct.dart';
 
 class Orders extends StatefulWidget {
-  const Orders({super.key});
+  const Orders({Key? key}) : super(key: key);
 
   @override
   State<Orders> createState() => _OrdersState();
 }
 
 class _OrdersState extends State<Orders> {
-  List list = [
-    "https://images.unsplash.com/photo-1699262289693-ff0c49b87fba?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1699262289693-ff0c49b87fba?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1699262289693-ff0c49b87fba?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1699262289693-ff0c49b87fba?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8",
-  ];
+  List<Order>? orders;
+  final AccountServices accountServices = AccountServices();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
+
+  void fetchOrders() async {
+    orders = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return orders == null
+        ? const Loader()
+        : Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(
+                left: 15,
+              ),
               child: const Text(
-                "Your Order",
+                'Your Orders',
                 style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(
+                right: 15,
+              ),
               child: Text(
-                "See all",
+                'See all',
                 style: TextStyle(
-                    fontSize: 18,
-                    color: GlobalVariables.selectedNavBarColor,
-                    fontWeight: FontWeight.w600),
+                  color: GlobalVariables.selectedNavBarColor,
+                ),
               ),
             ),
           ],
         ),
-        // to display a product we create a list view builder
+        // display orders
         Container(
           height: 170,
-          padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
+          padding: const EdgeInsets.only(
+            left: 10,
+            top: 20,
+            right: 0,
+          ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                return SingleProduct(image: list[index]);
-              }),
-        )
+            itemCount: orders!.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    OrderDetailScreen.routeName,
+                    arguments: orders![index],
+                  );
+                },
+                child: SingleProduct(
+                  image: orders![index].products[0].images[0],
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
