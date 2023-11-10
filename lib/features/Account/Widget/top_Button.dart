@@ -1,29 +1,46 @@
-import 'package:flutter/material.dart';
-import 'package:youtube_clone/features/Account/Widget/account_button.dart';
 
-class TopButton extends StatefulWidget {
-  const TopButton({super.key});
+import 'package:flutter/material.dart';
+
+import '../services/accountSrevices.dart';
+import 'account_button.dart';
+
+class TopButtons extends StatefulWidget {
+  const TopButtons({Key? key}) : super(key: key);
 
   @override
-  State<TopButton> createState() => _TopButtonState();
+  State<TopButtons> createState() => _TopButtonsState();
 }
 
-class _TopButtonState extends State<TopButton> {
+class _TopButtonsState extends State<TopButtons> {
   @override
   Widget build(BuildContext context) {
-    return   Column(
+    return Column(
       children: [
         Row(
           children: [
-            AccountButton(text: "Your Oder's",onTap:(){} ,) ,
-            AccountButton(text: "Turn Seller",onTap:(){} ,)
+            AccountButton(
+              text: 'Your Orders',
+              onTap: () {},
+            ),
+            AccountButton(
+              text: 'Turn Seller',
+              onTap: () {},
+            ),
           ],
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10),
         Row(
           children: [
-            AccountButton(text: "Log Out",onTap:(){} ,) ,
-            AccountButton(text: "Your Wishlist",onTap:(){} ,)
+            AccountButton(
+              text: 'Log Out',
+              onTap: () => {
+              AccountServices().logOut(context),
+              },
+            ),
+            AccountButton(
+              text: 'Your Wish List',
+              onTap: () {},
+            ),
           ],
         ),
       ],
