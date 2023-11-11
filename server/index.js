@@ -10,7 +10,7 @@ const userRouter = require("./routes/user");
 // INIT
 const PORT = process.env.PORT || 3000;
 const app = express();
- const DB="mongodb+srv://divyanshu:divya1234@cluster0.iamchvs.mongodb.net/?retryWrites=true&w=majority";
+ const DB="Your database url";
 
 // middleware
 app.use(express.json());
