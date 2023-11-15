@@ -1,16 +1,11 @@
-# youtube_clone
+# Amazon Clone 
+## ScreenShot 
+<img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0005.jpg?raw=true" height = 420 width=194.5>  <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0003.jpg?raw=true" height = 420>    <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0004.jpg?raw=true" height = 420> 
+<img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0006.jpg?raw=true" height = 420 width=194.5>  <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0008.jpg?raw=true" height = 420>    <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0010.jpg?raw=true" height = 420> 
+<img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0006.jpg?raw=true" height = 420 width=194.5>  <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0009.jpg?raw=true" height = 420>    <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0011.jpg?raw=true" height = 420> 
+<img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0012.jpg?raw=true" height = 420 width=194.5>  <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0013.jpg?raw=true" height = 420>    <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0014.jpg?raw=true" height = 420> 
+<img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0015.jpg?raw=true" height = 420 width=194.5>  <img src="https://github.com/Divyanshu050303/screenshots/blob/main/amazon_clone/IMG-20231110-WA0016.jpg?raw=true" height = 420>     
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
